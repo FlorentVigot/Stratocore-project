@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/logo.png" type="image/png">
+    <!-- Font Inter & Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">   
+
+    <title>PPMS</title>
+    <style>
+        /* Style */
+        body {
+            font-family:'Inter'; 
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body.dark-mode {
+            background-color: #1A202C;
+            color: white;
+        }
+        #app{
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #EDF2F7;
+            color: #2D3748;
+            padding: 1em 2em;
+            
+        }
+        body.dark-mode header, body.dark-mode footer {
+            background-color: #2D3748;
+            color: #F7FAFC
+        }
+        .logo{
+            display: flex;
+        }
+        .logo img {
+            height: 50px;
+            padding-right:  2em;
+            padding-top: 1em;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .main-nav ul li {
+            display: inline;
+        }
+
+        .main-nav a {
+            color: #2D3748;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        body.dark-mode .main-nav a{
+            color: #F7FAFC;
+        }
+        .user-actions{
+            gap: 20;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+            justify-content: end;
+        }
+        .user-actions a {
+            color: #2D3748;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        body.dark-mode .user-actions a{
+            color: #F7FAFC;
+        }
+        .user-actions img{
+            height: 20px;
+            width: 20px;
+            padding: 0;
+            
+        }
+        .user-actions a:hover,
+        .main-nav a:hover {
+            text-decoration: underline;
+        }
+        /* Icon */
+        .mode-icon {
+            font-size: 3rem;
+            padding: 10px;
+            cursor: pointer;
+            color: white;
+            right: 20px;
+            transition: color 0.3s;
+        } 
+        /* Button style */
+        button {
+            padding: 1em 2em;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+        .button-add {
+            background-color: #049DBF;
+            color: white;
+        }
+        .button-add:hover {
+            background-color: #0056b3;
+        }
+        .button-remove {
+            background-color: #BF215B;
+            color: white;
+        }
+        .button-remove:hover {
+            background-color: #5a6268;
+        }
+        .button:active {
+            transform: scale(0.95);
+        }
+        /* Section */
+        .section {
+            background-color: White;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin-bottom: 2em;
+            box-shadow: 0 1px 2px #2D3748;
+            transition: all 0.3s ease;
+            margin-left: 1em;
+            width: 50vw;
+            font-family:'Roboto'; 
+        }
+        body.dark-mode .section {
+            background-color: #2D3748;
+            box-shadow: 0 1px 2px #F7FAFC;
+        }
+        .section:hover {
+            box-shadow: 0 4px 8px #2D3748;
+        }
+        body.dark-mode .section:hover {   
+            box-shadow: 0 4px 8px #F7FAFC;
+        }
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 1em;
+        }
+        body.dark-mode .section h2{
+            color: #F7FAFC;
+        }
+        .section ul {
+            font-size: 1em;
+            margin-bottom: 1em;
+        }
+        body.dark-mode .section ul{
+            color: #F7FAFC;
+        }
+        .section p {
+            line-height: 1.6;
+            color: #049DBF;
+        }
+        body.dark-mode .section p{
+            color: #68D391;
+        }
+        /* Pop up */
+        .popup {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        body.dark-mode .popup{
+            background-color: #2D3748;
+        }
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .popup h3 {
+            margin-top: 0;
+            color: #2D3748;
+            text-align: center;
+        }
+        body.dark-mode .popup h3{
+            color: #F7FAFC;
+        }
+        .popup ul {
+            list-style: none;
+            padding: 0;
+        }
+        .popup li {
+            margin: 10px 0;
+        }
+        .popup button {
+            background-color: #049DBF;
+            color: white;
+            border: none;
+            padding: 0.5em 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .popup button.remove {
+            background-color: #BF215B;
+        }
+        .flex-col{
+            display: flex;
+            flex-direction: column;
+        }
+        .m-0{
+            margin: 0;
+        }
+        /* Footer */
+        footer {
+            background-color: #EDF2F7;
+            color: #2D3748;
+            text-align: center;
+            padding: 2em 0;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        footer img {
+            height: 50px;
+            margin-left: 20px;
+            padding-right: 20px;
+        }
+        footer span{
+            margin-right: auto;
+            margin-top: 15px;
+            
+        }
+        footer a {
+            color: #049DBF;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: 600;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Screen for Ipad device  */
+        @media screen and (max-width: 768px) {
+
+            h1{
+                font-size: 10px;
+                padding-top: 1em;
+            }
+            .logo img {
+                height: 25px;
+                padding-right:  0.5em;
+                padding-top: 0.5em;
+            }
+            .main-nav ul {
+                gap: 5px;
+            }
+            .main-nav a {
+                font-size: 10px;
+            }
+            .user-actions{
+                font-size: 8px;
+                gap: 2px;
+                padding-left: 0.5em;
+            }
+            .user-actions img{
+                margin-left: 2px;
+                height: 10px;
+                width: 10px;     
+            }
+            footer {
+                width: 768px;
+            }
+            }
+
+        /* Responsive Phone*/    
+        @media screen and (max-width: 425px) {
+            
+            h1{
+                font-size: 10px;
+                padding-top: 1em;
+            }
+            .logo img {
+                height: 25px;
+                padding-right:  1em;
+                padding-top: 0.5em;
+            }
+            .main-nav ul {
+                gap: 5px;
+            }
+            .main-nav a {
+                font-size: 0.3em;
+            }
+            .user-actions{
+                padding-top: 0.5em;
+                font-size: 0.3em;
+                gap: 2px;
+                padding-left: 0.5em;
+            }
+            .user-actions a {
+                padding-top: 0.5em;
+                
+            }
+            .user-actions img{
+                height: 10px;
+                width: 10px;     
+            }
+            button {
+                font-size: 0.5em;
+            }
+            .section {
+                width: 80vw;
+                margin: 10px;
+            }
+            footer {
+                width: 425px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- Header -->
+        <header>
+            <!-- Logo and title -->
+            <div class="logo">
+                <img src="/assets/logo.png" alt="Logo-Stratocore">
+                <h1>PPMS</h1>
+            </div>
+            <!-- Navigation page -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Training</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Orders</a></li>
+                    <li><a href="#">Documents</a></li>
+                    <li><a href="#">Incidents</a></li>
+                    <li><a href="#">Profile</a></li> 
+                </ul>
+            </nav>
+            <!-- Logout and Mode button-->
+            <div class="user-actions">
+                
+                <a href="#">Logout</a>
+                <!-- Light and dark mode icon -->
+                <img v-if="!isDarkMode" class="mode-icon" src="/assets/light.png" alt="light-mode" @click="toggleDarkMode"></img>
+                <img v-if="isDarkMode" class="mode-icon" src="/assets/dark.png" alt="dark-mode" @click="toggleDarkMode"></img>
+            </div>
+        </header>
+
+        <!-- Main Content-->   
+        <main>
+            <!-- Button Add and remove Section -->
+            <button @click="showPopup = true" class="button-add">Add Section</button>
+            <button class="button-remove">Remove Section</button>
+            <!-- A loop that generates several instances elements in the array -->
+            <section-component v-for="section in displayedSections" :key="section.id" :title="section.title"
+                :labels="section.labels" :values="section.values">
+            </section-component>
+
+        <!-- The popup appears when the user clicks the "Add Section" button. -->
+        <!-- Popup Component -->
+        <div v-if="showPopup" class="popup-overlay">
+            <div class="popup">
+                <h3>Add sections</h3>
+                <ul>
+                    <li v-for="section in availableSections" :key="section.id">
+                        {{ section.title }}
+                        <button @click="toggleSection(section)" v-if="!isSectionDisplayed(section)">Add</button>
+                        <button @click="toggleSection(section)" class="remove" v-else>Cancel</button>
+                    </li>
+                </ul>
+                <button @click="showPopup = false" style="background-color:#E2E8F0; color:#2D3748;">Close</button>
+            </div>
+        </div>
+        </main> 
+    </div>
+
+    <!-- Footer Component -->
+    <footer>
+        <img src="assets/logo_name.png" alt="Logo-Stratocore">
+        <span>PPMS 1.0</span>
+        <p><a href="#">Contact Us</a></p>
+    </footer>
+
+    <!-- Inclusion de Vue.js via CDN -->
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <script>
+        const sectionsData = [
+                {
+                    id:1,
+                    title: 'My user profile',
+                    labels: ['Name', 'Email', 'Phone'],
+                    values: ['John Doe', 'johndoe@ppms.com', '+10000000000']
+                },
+                {
+                    id: 2,
+                    title: 'My training sessions',
+                    labels: ['Training session 1', 'Training session 2', 'Training session 3', 'Training session 4', 'Training session 5', 'Training session 6'],
+                    values: ['Pending approval', 'Pending approval', 'Pending approval', 'Approved', 'Approved', 'Approved']
+                },
+                {
+                    id: 3,
+                    title: 'My projects',
+                    labels: ['Project A', 'Project B', 'Project C', 'Project D'],
+                    values: ['Pending approval', 'Pending approval', 'Approved',
+                        'Approved']
+                },
+                {
+                    id: 4,
+                    title: 'Orders',
+                    labels: ['Order 1', 'Order 2', 'Order 3'],
+                    values: ['Rejected', 'Approved', 'Approved']
+                },
+                {
+                    id: 5,
+                    title: 'My documents',
+                    labels: ['Document 1', 'Document 2', 'Document 3', 'Document 4'],
+                    values: ['Approved', 'Approved', 'Rejected', 'Approved']
+                },
+                {
+                    id: 6,
+                    title: 'Incidents',
+                    labels: ['Incident 1', 'Incident 2', 'Incident 3'],
+                    values: ['Pending', 'Pending', 'Pending']
+                },
+                {
+                    id: 7,
+                    title: 'Quotes',
+                    labels: ['Quote 1', 'Quote 2'],
+                    values: ['Pending approval', 'Pending approval']
+                }
+            ];
+        const app = Vue.createApp({
+            data() {
+                return {
+                    // sections: sectionsData,
+                    availableSections: sectionsData,   // All sections available to be added
+                    displayedSections: [],            // Sections currently displayed on the homepage
+                    showPopup: false,                 // Boolean to control popup visibility
+                    isDarkMode: false                 // Boolean to monitor dark mode status
+                };
+            },
+            methods: {
+                toggleSection(section) {
+                    // If the section is displayed, remove it, otherwise add it
+                    const index = this.displayedSections.findIndex(s => s.id === section.id);
+                    if (index === -1) {
+                        this.displayedSections.push(section);
+                    } else {
+                        this.displayedSections.splice(index, 1);
+                    }
+                },
+                isSectionDisplayed(section) {
+                    // Check if the section is already displayed
+                    return this.displayedSections.some(s => s.id === section.id);
+                },
+                toggleDarkMode() {
+                    this.isDarkMode = !this.isDarkMode;  // Reverse mode
+                    if (this.isDarkMode) {
+                        document.body.classList.add('dark-mode');
+                    } else {
+                        document.body.classList.remove('dark-mode');
+                    }
+                }
+            },
+            });
+                app.component('section-component',{
+                props: ['title', 'labels', 'values'],
+                    template: `
+                    <div class="section">
+                        <h2>{{ title }}</h2>
+                        <ul v-for="(label,index) in labels" :key="index">
+                            <li> 
+                                <div class="flex-col">
+                                    <h3 class="m-0">{{ label }}</h3>
+                                    <p class="m-0">{{ values[index] }}</p> 
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                `
+            }),
+
+        app.mount('#app');
+    </script>
+
+</body>
+
+</html>
