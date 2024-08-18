@@ -1,5 +1,5 @@
 # PPMS
-
+![alt text](https://ppms.us/stratocore.png)
 Platform for research institutes. I developed this platform which includes 2 functions: dark mode and adding sections.
 
 ## How to use ?
@@ -15,13 +15,14 @@ I used Vue 3 and modern CSS. The WCAG is good.
 ### Color
 
 I have chosen the following colours:
+<br>
 `Light mode:`
 
 - `White` is used as the main background for a bright, clear interface. This creates a strong contrast with the textual and interactive elements.
 - `#EDF2F7` Light grey to structure the interface for header and footer
 - `#2D3748` Charcoal black to highlight text
 - `#BF215B` & `#BF215B` blue and pink color for buttons and interactive elements.
-
+<br>
 `Dark mode :`
 
 - `#1A202C` Main color. Navy blue is a colour associated with reliability, stability and confidence. In the scientific field, it also represents rigour and technical expertise.
