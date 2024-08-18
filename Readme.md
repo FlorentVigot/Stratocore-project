@@ -3,7 +3,7 @@
 Platform for research institutes. I developed this platform which includes 2 functions: dark mode and adding sections.
 
 ## How to use ?
-
+To launch the project, open a terminal and type the command `php -S localhost:8000`
 To use the platform, you can choose your mode (light or dark). Then, you can add sections by pressing the button. You choose the sections you want. You can add or cancel. When you have finished, you can close the pop-up window.
 
 ## Technologies
@@ -23,7 +23,7 @@ I have chosen the following colours:
 - `#2D3748` Charcoal black to highlight text
 - `#BF215B` & `#BF215B` blue and pink color for buttons and interactive elements.
 <br>
-`Dark mode :`
+`Dark mode:`
 
 - `#1A202C` Main color. Navy blue is a colour associated with reliability, stability and confidence. In the scientific field, it also represents rigour and technical expertise.
 - `#F7FAFC` Main text.
