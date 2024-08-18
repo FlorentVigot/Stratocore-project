@@ -10,7 +10,7 @@ To use the platform, you can choose your mode (light or dark). Then, you can add
 
 I used Vue 3 and modern CSS. The WCAG is good.
 
-## Graphic Chart
+## Graphic charter
 
 ### Color
 
